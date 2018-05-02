@@ -27,13 +27,13 @@ var git = require('gulp-git');
 var binPath = path.resolve(__dirname, './node_modules/.bin/');
 var browserifyPath = path.resolve(binPath, './browserify');
 var uglifyPath = path.resolve(binPath, './uglifyjs');
-var indexPath = path.resolve(__dirname, './lib/bitauth-browserify');
-var namePath = path.resolve(__dirname, './bitauth');
+var indexPath = path.resolve(__dirname, './lib/zauth-browserify');
+var namePath = path.resolve(__dirname, './zauth');
 var bundlePath = namePath + '.js';
 var minPath = namePath + '.min.js';
 
 var browserifyCommand = browserifyPath + ' -p bundle-collapser/plugin --require ' +
-  indexPath + ':bitauth -o ' + bundlePath;
+  indexPath + ':zauth -o ' + bundlePath;
 var uglifyCommand = uglifyPath + ' ' + bundlePath + ' --compress --mangle -o ' + minPath;
 
 gulp.task('browser:uncompressed', shell.task([

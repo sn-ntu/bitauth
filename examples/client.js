@@ -1,7 +1,7 @@
 var request = require('request');
-var bitauth = require('..'); // or require('bitauth');
+var zauth = require('..'); // or require('zauth');
 
-// These can be generated with bitauth.generateSin()
+// These can be generated with zauth.generateSin()
 var keys = {
   alice: '38f93bdda21a5c4a7bae4eb75bb7811cbc3eb627176805c1009ff2099263c6ad',
   bob: '09880c962437080d72f72c8c63a69efd65d086c9e7851a87b76373eb6ce9aab5'
@@ -15,8 +15,8 @@ for(k in keys) {
   var options = {
     url: url,
     headers: {
-      'x-identity': bitauth.getPublicKeyFromPrivateKey(keys[k]),
-      'x-signature': bitauth.sign(dataToSign, keys[k])
+      'x-identity': zauth.getPublicKeyFromPrivateKey(keys[k]),
+      'x-signature': zauth.sign(dataToSign, keys[k])
     }
   };
 
@@ -41,8 +41,8 @@ for(k in keys) {
   var options = {
     url: url,
     headers: {
-      'x-identity': bitauth.getPublicKeyFromPrivateKey(keys[k]),
-      'x-signature': bitauth.sign(dataToSign, keys[k])
+      'x-identity': zauth.getPublicKeyFromPrivateKey(keys[k]),
+      'x-signature': zauth.sign(dataToSign, keys[k])
     },
     json: data
   };

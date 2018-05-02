@@ -15,7 +15,7 @@ the public key.
 Install with Node.js:
 
 ```bash
-npm install bitauth
+npm install zauth
 ```
 
 To generate a browser bundle, you can then run:
@@ -95,7 +95,7 @@ Example server
 var express = require('express');
 var bodyParser = require('body-parser');
 var rawBody = require('../lib/middleware/rawbody');
-var bitauth = require('../lib/middleware/bitauth');
+var zauth = require('../lib/middleware/zauth');
 
 var users = {
   'Tf7UNQnxB8SccfoyZScQmb34V2GdEtQkzDz': {name: 'Alice'},
@@ -109,12 +109,12 @@ app.use(rawBody);
 app.use(bodyParser());
 
 
-app.get('/user', bitauth, function(req, res) {
+app.get('/user', zauth, function(req, res) {
   if(!req.sin || !users[req.sin]) return res.send(401, {error: 'Unauthorized'});
   res.send(200, users[req.sin]);
 });
 
-app.post('/pizzas', bitauth, function(req, res) {
+app.post('/pizzas', zauth, function(req, res) {
   if(!req.sin || !users[req.sin]) return res.send(401, {error: 'Unauthorized'});
   var pizza = req.body;
   pizza.owner = users[req.sin].name;
@@ -133,9 +133,9 @@ Example client
 
 ```javascript
 var request = require('request');
-var bitauth = require('../lib/bitauth');
+var zauth = require('../lib/zauth');
 
-// These can be generated with bitauth.generateSin()
+// These can be generated with zauth.generateSin()
 var keys = {
   alice: '38f93bdda21a5c4a7bae4eb75bb7811cbc3eb627176805c1009ff2099263c6ad',
   bob: '09880c962437080d72f72c8c63a69efd65d086c9e7851a87b76373eb6ce9aab5'
@@ -149,8 +149,8 @@ for(k in keys) {
   var options = {
     url: url,
     headers: {
-      'x-identity': bitauth.getPublicKeyFromPrivateKey(keys[k]),
-      'x-signature': bitauth.sign(dataToSign, keys[k])
+      'x-identity': zauth.getPublicKeyFromPrivateKey(keys[k]),
+      'x-signature': zauth.sign(dataToSign, keys[k])
     }
   };
 
@@ -175,8 +175,8 @@ for(k in keys) {
   var options = {
     url: url,
     headers: {
-      'x-identity': bitauth.getPublicKeyFromPrivateKey(keys[k]),
-      'x-signature': bitauth.sign(dataToSign, keys[k])
+      'x-identity': zauth.getPublicKeyFromPrivateKey(keys[k]),
+      'x-signature': zauth.sign(dataToSign, keys[k])
     },
     json: data
   };
@@ -196,8 +196,8 @@ for(k in keys) {
 ## Middleware
 BitAuth exposes a connect middleware for use in connect or ExpressJS applications.  Use:
 ```javascript
-var bitauth = require('bitauth');
-app.use( bitauth.middleware );
+var zauth = require('zauth');
+app.use( zauth.middleware );
 ```
 
 ## Development
@@ -208,7 +208,7 @@ To build a browser compatible version of BitAuth, run the following command from
 gulp browser
 ```
 
-This will output `bitauth.min.js` to project directory. The script can be loaded using `require('bitauth')`.
+This will output `zauth.min.js` to project directory. The script can be loaded using `require('zauth')`.
 
 To then run tests for a web browser:
 

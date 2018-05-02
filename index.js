@@ -1,15 +1,15 @@
 'use strict';
 
-var bitauth;
+var zauth;
 if (process.browser) {
-  bitauth = require('./lib/bitauth-browserify');
+  zauth = require('./lib/zauth-browserify');
 } else {
-  bitauth = require('./lib/bitauth-node');
+  zauth = require('./lib/zauth-node');
 
   // add node-specific encrypt/decrypt
-  bitauth.encrypt = require('./lib/encrypt');
-  bitauth.decrypt = require('./lib/decrypt');
-  bitauth.middleware = require('./lib/middleware/bitauth');
+  zauth.encrypt = require('./lib/encrypt');
+  zauth.decrypt = require('./lib/decrypt');
+  zauth.middleware = require('./lib/middleware/zauth');
 }
 
-module.exports = bitauth;
+module.exports = zauth;

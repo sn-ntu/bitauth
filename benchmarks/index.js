@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 var benchmark = require('benchmark');
-var bitauth = require('../lib/bitauth-node');
+var zauth = require('../lib/zauth-node');
 var async = require('async');
 
 var maxTime = 10;
@@ -19,13 +19,13 @@ async.series([
     var signature = '3045022100db71942a5a6dd1443cbf7519b2bc16a041aff8d4830bd42599f03ce503b8bf700220281989345617548d2512391a4b04450761df9add920d83043f9e21cb5baeb703';
     var signatureBuffer = new Buffer(signature, 'hex');
 
-    function nodebitauthVerify() {
-      bitauth.verifySignature(contractBuffer, pubkeyBuffer, signatureBuffer);
+    function nodezauthVerify() {
+      zauth.verifySignature(contractBuffer, pubkeyBuffer, signatureBuffer);
     }
 
     // #verifySignature
     var suite = new benchmark.Suite();
-    suite.add('bitauth#verifySignature', nodebitauthVerify, { maxTime: maxTime });
+    suite.add('zauth#verifySignature', nodezauthVerify, { maxTime: maxTime });
     suite
       .on('cycle', function(event) {
         console.log(String(event.target));
@@ -41,13 +41,13 @@ async.series([
     // invalid checksum
     var sinbad = 'Tf1Jc1xSbqasm5QLwwSQc5umddx2h7mAMhX';
 
-    function nodebitauthValidateSin() {
-      bitauth.validateSin(sinbad);
+    function nodezauthValidateSin() {
+      zauth.validateSin(sinbad);
     }
 
     // #validateSin
     var suite = new benchmark.Suite();
-    suite.add('bitauth#validateSin', nodebitauthValidateSin, { maxTime: maxTime });
+    suite.add('zauth#validateSin', nodezauthValidateSin, { maxTime: maxTime });
     suite
       .on('cycle', function(event) {
         console.log(String(event.target));

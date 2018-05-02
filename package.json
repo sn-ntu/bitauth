@@ -1,5 +1,5 @@
 {
-  "name": "bitauth",
+  "name": "zauth",
   "description": "Passwordless authentication using Bitcoin cryptography",
   "author": {
     "name": "Patrick Nagurny",
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitpay/bitauth.git"
+    "url": "https://github.com/sn-ntu/zauth.git"
   },
   "contributors": [
     {
@@ -21,6 +21,10 @@
     {
       "name": "Braydon Fuller",
       "email": "braydon@bitpay.com"
+    },
+    {
+      "name": "SN",
+      "email": "snguyen@zcoin.io"
     }
   ],
   "scripts": {
